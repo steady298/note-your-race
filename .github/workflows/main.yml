@@ -12,7 +12,7 @@ on:
         required: false
 
   schedule:
-    - cron: '30 11 * * 5'
+    - cron: '30 11 * * 3,5,1'
     # run every day at 19:30 in every Friday
 
 jobs:
