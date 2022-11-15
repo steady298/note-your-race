@@ -1,0 +1,35 @@
+# This workflows will upload a Python Package using Twine when a release is created
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
+
+name: startCheckingIn
+
+on:
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Just run the job manually.'
+        type: string
+        required: false
+
+  schedule:
+    - cron: '30 11 * * 5'
+    # run every day at 19:30 in every Friday
+
+jobs:
+  chekIn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+
+      - name: Install requests
+        run: |
+          pip install requests
+      - name: Working
+        env:
+          SERVERPUSHKEY: ${{ secrets.SERVERPUSHKEY }}
+        run: python checkIn.py
